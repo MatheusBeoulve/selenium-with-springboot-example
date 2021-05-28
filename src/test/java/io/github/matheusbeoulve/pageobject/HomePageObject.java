@@ -4,11 +4,11 @@ import com.applitools.eyes.selenium.fluent.Target;
 import io.github.matheusbeoulve.PageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.test.context.TestComponent;
 
 import java.time.Duration;
 
-@Component
+@TestComponent
 public class HomePageObject extends PageObject {
 
     @FindBy(css = "input[name=q]")

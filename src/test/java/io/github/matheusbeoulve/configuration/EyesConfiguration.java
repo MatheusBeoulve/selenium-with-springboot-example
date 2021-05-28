@@ -1,5 +1,6 @@
 package io.github.matheusbeoulve.configuration;
 
+import io.cucumber.spring.ScenarioScope;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

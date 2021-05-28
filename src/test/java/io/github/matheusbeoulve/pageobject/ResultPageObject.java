@@ -1,14 +1,15 @@
 package io.github.matheusbeoulve.pageobject;
 
 import com.applitools.eyes.selenium.fluent.Target;
+import io.cucumber.spring.ScenarioScope;
 import io.github.matheusbeoulve.PageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.springframework.stereotype.Component;
+import org.springframework.boot.test.context.TestComponent;
 
 import java.time.Duration;
 
-@Component
+@TestComponent
 public class ResultPageObject extends PageObject {
 
     @FindBy(css = "h3.LC20lb.DKV0Md")

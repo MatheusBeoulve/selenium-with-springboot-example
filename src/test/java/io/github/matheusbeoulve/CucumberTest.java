@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Cucumber
-public class CucumberIT {
+public class CucumberTest {
 
     @Autowired
     static WebDriver webDriver;
