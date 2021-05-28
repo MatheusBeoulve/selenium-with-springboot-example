@@ -16,16 +16,20 @@
     <version>${revision}</version>
 
     <properties>
+
         <spring.version>2.5.0</spring.version>
         <junit-jupiter.version>5.7.0</junit-jupiter.version>
         <cucumber.version>6.9.1</cucumber.version>
         <selenium.version>3.141.59</selenium.version>
         <lombok.version>1.18.20</lombok.version>
         <assertj.version>3.19.0</assertj.version>
-        <docker-plugin.version>0.36.0</docker-plugin.version>
+        <eyes.version>3.201.1</eyes.version>
+        <dependency-plugin.version>3.1.2</dependency-plugin.version>
+
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
         <revision>0.0.0</revision> <!-- CI Friendly Versioning -->
     </properties>
 
@@ -60,7 +64,7 @@
         <dependency>
             <groupId>com.applitools</groupId>
             <artifactId>eyes-selenium-java3</artifactId>
-            <version>RELEASE</version>
+            <version>${eyes.version}</version>
         </dependency>
         <dependency>
             <groupId>io.cucumber</groupId>
@@ -109,7 +113,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
-                <version>3.1.2</version>
+                <version>${dependency-plugin.version}</version>
             </plugin>
         </plugins>
     </build>
