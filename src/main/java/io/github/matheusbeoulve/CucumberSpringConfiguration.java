@@ -59,12 +59,6 @@ public class CucumberSpringConfiguration {
         configuration.addBrowser(
                 eyesConfiguration.getViewportY(),
                 eyesConfiguration.getViewportX(),
-                BrowserType.CHROME
-        );
-
-        configuration.addBrowser(
-                eyesConfiguration.getViewportY(),
-                eyesConfiguration.getViewportX(),
                 BrowserType.FIREFOX
         );
 

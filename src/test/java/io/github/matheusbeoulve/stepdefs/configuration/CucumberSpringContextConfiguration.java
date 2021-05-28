@@ -32,8 +32,6 @@ public class CucumberSpringContextConfiguration implements En {
 
         After(() -> {
 
-            webDriver.quit();
-
             try {
                 if(eyes.getIsOpen()) {
                     eyes.closeAsync();
@@ -45,6 +43,5 @@ public class CucumberSpringContextConfiguration implements En {
             log.info("Closing Eyes.");
 
         });
-
     }
 }

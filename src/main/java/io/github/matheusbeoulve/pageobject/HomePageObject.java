@@ -4,7 +4,6 @@ import com.applitools.eyes.selenium.fluent.Target;
 import io.github.matheusbeoulve.PageObject;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
@@ -29,7 +28,7 @@ public class HomePageObject extends PageObject {
 
         expect(searchBar)
                 .withTimeout(Duration.ofSeconds(5))
-                .until(ExpectedConditions::visibilityOf);
+                .until(WebElement::isDisplayed);
 
         getEyes().check(Target.window().fully().withName("Home Page"));
 

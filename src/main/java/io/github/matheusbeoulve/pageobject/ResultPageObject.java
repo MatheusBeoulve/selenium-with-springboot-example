@@ -20,7 +20,7 @@ public class ResultPageObject extends PageObject {
                 .withTimeout(Duration.ofSeconds(5))
                 .until(WebElement::isDisplayed);
 
-        getEyes().check(Target.window().fully().withName("Results page"));
+        getEyes().check(Target.window().fully().layout().withName("Results page"));
 
         return this;
 
