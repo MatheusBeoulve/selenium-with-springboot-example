@@ -5,9 +5,7 @@ import io.cucumber.junit.CucumberOptions;
 import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
-@CucumberOptions(
-        features = "classpath:features",
-        glue = {
-                "io.github.matheusbeoulve"
-        })
-public class CucumberSpringTestRunner {}
+@CucumberOptions(features = "classpath:features",
+                 publish = true,
+                 glue = "io.github.matheusbeoulve")
+public class CucumberSpringTest {}

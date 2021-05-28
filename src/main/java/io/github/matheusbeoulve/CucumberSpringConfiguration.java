@@ -1,7 +1,14 @@
 package io.github.matheusbeoulve;
 
-import io.cucumber.spring.ScenarioScope;
-import io.github.matheusbeoulve.configuration.WebdriverConfiguration;
+import com.applitools.eyes.BatchInfo;
+import com.applitools.eyes.selenium.BrowserType;
+import com.applitools.eyes.selenium.Configuration;
+import com.applitools.eyes.selenium.Eyes;
+import com.applitools.eyes.visualgrid.model.DeviceName;
+import com.applitools.eyes.visualgrid.model.ScreenOrientation;
+import com.applitools.eyes.visualgrid.services.VisualGridRunner;
+import io.github.matheusbeoulve.configuration.EyesConfiguration;
+import io.github.matheusbeoulve.configuration.WebDriverConfiguration;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeOptions;
@@ -20,17 +27,59 @@ import org.springframework.context.annotation.ComponentScan;
 public class CucumberSpringConfiguration {
 
     @Autowired
-    WebdriverConfiguration webDriverConfiguration;
+    WebDriverConfiguration webDriverConfiguration;
+
+    @Autowired
+    EyesConfiguration eyesConfiguration;
 
     @Bean
-    @ScenarioScope
-    public WebDriver webDriver() {
+    WebDriver webDriver() {
         return RemoteWebDriver.builder()
                 .url(webDriverConfiguration.getUrl())
                 .oneOf(new ChromeOptions(),
-                       new FirefoxOptions(),
-                       new EdgeOptions(),
-                       new InternetExplorerOptions())
+                        new FirefoxOptions(),
+                        new EdgeOptions(),
+                        new InternetExplorerOptions())
                 .build();
+    }
+
+    @Bean
+    Eyes eyes() {
+
+        VisualGridRunner visualGridRunner = new VisualGridRunner(eyesConfiguration.getConcurrency());
+
+        Eyes eyes = new Eyes(visualGridRunner);
+
+        Configuration configuration = new Configuration();
+
+        configuration.setApiKey(eyesConfiguration.getApiKey());
+        configuration.setBatch(new BatchInfo(eyesConfiguration.getBatchInfo()));
+        configuration.setBranchName(eyesConfiguration.getBranchName());
+
+        configuration.addBrowser(
+                eyesConfiguration.getViewportY(),
+                eyesConfiguration.getViewportX(),
+                BrowserType.CHROME
+        );
+
+        configuration.addBrowser(
+                eyesConfiguration.getViewportY(),
+                eyesConfiguration.getViewportX(),
+                BrowserType.FIREFOX
+        );
+
+        configuration.addDeviceEmulation(
+                DeviceName.iPhone_11_Pro_Max,
+                ScreenOrientation.PORTRAIT
+        );
+
+        configuration.addDeviceEmulation(
+                DeviceName.Pixel_2,
+                ScreenOrientation.PORTRAIT
+        );
+
+        eyes.setConfiguration(configuration);
+
+        return eyes;
     }
 }

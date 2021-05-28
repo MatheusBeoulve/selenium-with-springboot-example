@@ -1,2 +1,11 @@
 webdriver:
-    url: http://localhost:4444/
+    url: http://localhost:4444
+    implicitly-timeout: 3
+eyes:
+    app-name: Google
+    batch-info: Google Search
+    branch-name: staging
+    api-key: ${EYES_API_KEY}
+    concurrency: 1
+    viewportY: 1024
+    viewportX: 2048
