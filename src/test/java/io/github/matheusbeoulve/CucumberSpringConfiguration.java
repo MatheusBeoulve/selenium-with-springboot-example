@@ -16,24 +16,21 @@ import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Lazy;
 
-@TestConfiguration
-@ComponentScan
-@ConfigurationPropertiesScan
+@ScenarioConfiguration
 public class CucumberSpringConfiguration {
 
     @Autowired
-    WebDriverConfiguration webDriverConfiguration;
+    public WebDriverConfiguration webDriverConfiguration;
 
     @Autowired
-    EyesConfiguration eyesConfiguration;
+    public EyesConfiguration eyesConfiguration;
 
     @Bean
-    WebDriver webDriver() {
+    @Lazy
+    public WebDriver webDriver() {
         return RemoteWebDriver.builder()
                 .url(webDriverConfiguration.getUrl())
                 .oneOf(new ChromeOptions(),
@@ -44,8 +41,8 @@ public class CucumberSpringConfiguration {
     }
 
     @Bean
-    Eyes eyes() {
-
+    @Lazy
+    public Eyes eyes() {
         VisualGridRunner visualGridRunner = new VisualGridRunner(eyesConfiguration.getConcurrency());
 
         Eyes eyes = new Eyes(visualGridRunner);
@@ -60,11 +57,6 @@ public class CucumberSpringConfiguration {
                 eyesConfiguration.getViewportY(),
                 eyesConfiguration.getViewportX(),
                 BrowserType.FIREFOX
-        );
-
-        configuration.addDeviceEmulation(
-                DeviceName.iPhone_11_Pro_Max,
-                ScreenOrientation.PORTRAIT
         );
 
         configuration.addDeviceEmulation(

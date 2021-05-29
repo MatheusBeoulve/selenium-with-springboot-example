@@ -6,8 +6,4 @@ RUN mvn dependency:go-offline -B
 
 COPY ./src ./src
 
-RUN mvn install -DskipTests
-
-RUN mvn clean
-
 ENTRYPOINT mvn test

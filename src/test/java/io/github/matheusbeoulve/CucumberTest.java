@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class CucumberTest {
 
     @Autowired
-    static WebDriver webDriver;
+    public static WebDriver webDriver;
 
     @AfterAll
     public static void tearDown() {

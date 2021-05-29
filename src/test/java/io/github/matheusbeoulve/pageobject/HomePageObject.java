@@ -2,13 +2,13 @@ package io.github.matheusbeoulve.pageobject;
 
 import com.applitools.eyes.selenium.fluent.Target;
 import io.github.matheusbeoulve.PageObject;
+import io.github.matheusbeoulve.ScenarioComponent;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.springframework.boot.test.context.TestComponent;
 
 import java.time.Duration;
 
-@TestComponent
+@ScenarioComponent
 public class HomePageObject extends PageObject {
 
     @FindBy(css = "input[name=q]")

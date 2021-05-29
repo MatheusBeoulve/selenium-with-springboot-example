@@ -6,46 +6,33 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.PageFactory;
-import org.openqa.selenium.support.ui.FluentWait;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 
 import javax.annotation.PostConstruct;
 import java.util.concurrent.TimeUnit;
 
-public abstract class PageObject {
+public abstract class PageObject implements FluentExpectation {
 
     @Autowired
-    private WebDriverConfiguration webDriverConfiguration;
+    public WebDriverConfiguration webDriverConfiguration;
 
     @Autowired
-    @Getter(AccessLevel.PROTECTED)
-    private Eyes eyes;
-
-    @Getter(AccessLevel.PROTECTED)
-    private WebDriver webDriver;
+    @Getter
+    public Eyes eyes;
 
     @Autowired
-    private void setWebDriver(@Lazy WebDriver webDriver) {
-        this.webDriver = webDriver;
-    }
+    @Getter
+    public WebDriver webDriver;
 
     @PostConstruct
-    private void pageFactoryInitElements() {
+    private void configureWebDriver() {
         PageFactory.initElements(getWebDriver(), this);
-    }
-
-    @PostConstruct
-    private void implicitlyWaitTimeout() {
-        getWebDriver().manage().timeouts()
-                .implicitlyWait(webDriverConfiguration.getImplicitlyTimeout(), TimeUnit.SECONDS);
-    }
-
-    protected FluentWait<WebDriver> expect() {
-        return new FluentWait<>(getWebDriver());
-    }
-
-    protected <T> FluentWait<T> expect(T o) {
-        return new FluentWait<>(o);
+        getWebDriver()
+                .manage()
+                .timeouts()
+                .implicitlyWait(
+                        webDriverConfiguration.getImplicitlyTimeout(),
+                        TimeUnit.SECONDS
+                );
     }
 }
