@@ -32,7 +32,7 @@
 
         <revision>0.0.0</revision> <!-- CI Friendly Versioning -->
     </properties>
-
+ 
     <distributionManagement>
         <repository>
             <id>github</id>
